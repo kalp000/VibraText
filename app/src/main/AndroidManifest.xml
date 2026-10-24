@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Plays the vibration patterns. -->
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <!--
+        Keeps the CPU awake only while a pattern is playing, so a long message is not stalled when the
+        screen is off. Held with a time limit and released as soon as playback ends or is stopped.
+    -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <!--
+        No INTERNET permission: VibraText has no network access at all.
+        Notification access is not a manifest permission; the user grants it in system settings.
+    -->
+
+    <!--
+        Package visibility (Android 11+): lets the app list the installed apps that have a launcher
+        icon so the user can choose which ones to monitor. No QUERY_ALL_PACKAGES permission is used.
+    -->
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent>
+    </queries>
+
+    <application
+        android:name=".VibraTextApp"
+        android:allowBackup="false"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.VibraText">
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:theme="@style/Theme.VibraText">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- Receives notifications from the apps the user selected. Bound by the system only after
+             the user grants notification access. -->
+        <service
+            android:name=".notification.NotificationMonitorService"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
+            <intent-filter>
+                <action android:name="android.service.notification.NotificationListenerService" />
+            </intent-filter>
+        </service>
+    </application>
+</manifest>
