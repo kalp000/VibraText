@@ -2,6 +2,10 @@
 
 **Feel who is messaging you, without looking at your phone.**
 
+##PREVIEW
+
+https://github.com/user-attachments/assets/8d209d6a-bf0f-4611-af41-f5e4aeed7b74
+
 VibraText is a native Android app (Kotlin, Jetpack Compose) that turns notifications from the apps *you choose*
 (WhatsApp, Signal, Telegram, …) into **vibration patterns that spell out the sender and the message**. You learn
 the code once, then read notifications by touch with the phone in your pocket.
